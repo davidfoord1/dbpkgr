@@ -37,17 +37,14 @@ dbp_init <- function(connection, package_name) {
 
   # Generate files in the temp_dir based on the connection
   # Each file should have a function and a auto-generated roxygen docstring
-  # The functions should be options:
 
-  # create_list_tables_fun(package_name, path)
+  create_list_tables_fun(package_name, path)
   # create_list_schema_fun(package_name, path)
   # create_query_fun(package_name, path)
   # create_execute_fun(package_name, path)
-  # Execute (SQL) on the connection
 
   # A function per table to work with just that table (e.g. in dbplyr pipeline)
   # db_structure <- dbp_get_db_structure(connection)
-
   # mapply(create_table_funs, db_structure[["TABLE_SCHEMA"]] db_structure[["TABLE_NAME]],)
 
   invisible()
@@ -96,6 +93,17 @@ dbp_package_path <- function(package_name) {
 #' @return
 #' Returns `NULL` invisbly.
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' # demo db in memory
+#' con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+#' DBI::dbWriteTable(con, "mtcars", mtcars)
+#'
+#' dbp_package(con, mydb)
+#'
+#' mydb_list_tables()
+#' }
 dbp_package <- function(connection, package_name) {
   # if package not initialised (check dbp_env?):
   dbp_init(connection, package_name)

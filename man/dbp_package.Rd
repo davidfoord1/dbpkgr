@@ -18,3 +18,14 @@ Returns \code{NULL} invisbly.
 \description{
 Generates a temporary package
 }
+\examples{
+\dontrun{
+# demo db in memory
+con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+DBI::dbWriteTable(con, "mtcars", mtcars)
+
+dbp_package(con, mydb)
+
+mydb_list_tables()
+}
+}
