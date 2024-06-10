@@ -1,4 +1,4 @@
-create_temp_package_dir <- function(path) {
+create_db_package_dir <- function(path) {
   if(!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
     dir.create(file.path(path, "R"))
@@ -7,7 +7,7 @@ create_temp_package_dir <- function(path) {
   invisible()
 }
 
-create_temp_package_desc <- function(package_name, path) {
+create_db_package_desc <- function(package_name, path) {
   description_path <- file.path(path, "DESCRIPTION")
 
   description_content <- paste(
@@ -25,7 +25,7 @@ create_temp_package_desc <- function(package_name, path) {
   invisible()
 }
 
-create_temp_package_path <- function(package_name, temporary) {
+create_db_package_path <- function(package_name, temporary) {
   if (temporary) {
     file.path(tempdir(), package_name)
   } else {
@@ -33,19 +33,14 @@ create_temp_package_path <- function(package_name, temporary) {
   }
 }
 
-#' Uninstall and delete a temporary package
+#' Uninstall and delete a dbpkgr db package
 #'
 #' @param package_name The name of the package to be deleted.
 #' @param path The path to the package files.
 #'
 #' @return
 #' Returns `NULL` invisibly.
-#'
-#' @examples
-#' \dontrun{
-#' remove_temp_package(package_name, dbp_package_path(package_name))
-#' }
-remove_temp_package <- function(package_name) {
+remove_db_package <- function(package_name) {
   path <- dbp_package_path(package_name)
 
   tryCatch({

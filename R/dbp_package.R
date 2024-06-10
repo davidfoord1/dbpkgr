@@ -34,13 +34,13 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
   # dbp_env[[paste0(package_name, "_connection")]] <- connection
 
   # Create temp package directory
-  path <- create_temp_package_path(package_name, temp)
+  path <- create_db_package_path(package_name, temp)
 
   dbp_env[[paste0(package_name, "_path")]] <- path
   dbp_env[[paste0(package_name, "_is_temp")]] <- temp
 
-  create_temp_package_dir(path)
-  create_temp_package_desc(package_name, path)
+  create_db_package_dir(path)
+  create_db_package_desc(package_name, path)
 
   # Generate files in the temp_dir based on the connection
   # Each file should have a function and a auto-generated roxygen docstring
@@ -80,7 +80,7 @@ dbp_load <- function(package_name, temp = TRUE) {
     reg.finalizer(dbp_env, onexit = TRUE, function(e) {
       # Called when the dbp_env is unloaded
       # e.g. at the end of an R session
-      remove_temp_package(package_name)
+      remove_db_package(package_name)
     })
   }
 
