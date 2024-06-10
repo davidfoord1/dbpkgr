@@ -4,13 +4,16 @@
 \alias{dbp_init}
 \title{Prepare package files based on a database connection}
 \usage{
-dbp_init(connection, package_name)
+dbp_init(connection, package_name, temp = TRUE)
 }
 \arguments{
 \item{connection}{A database connection object.}
 
-\item{package_name}{A string to be used as the name of the temporary package and the prefix to its
+\item{package_name}{A string to be used as the name of the temp package and the prefix to its
 functions. Must be a valid package name; lowercase no punctuation recommended.}
+
+\item{temp}{Whether the the package should be detached and deleted at
+the end of the R session. Set to \code{FALSE} to allow it to persist.}
 }
 \value{
 Returns \code{NULL} invisibly.

@@ -2,9 +2,9 @@
 % Please edit documentation in R/dbp_package.R
 \name{dbp_load}
 \alias{dbp_load}
-\title{Load temporary package}
+\title{Load temp package}
 \usage{
-dbp_load(package_name)
+dbp_load(package_name, temp = TRUE)
 }
 \arguments{
 \item{package_name}{Name of a package already initialised with \code{\link[=dbp_init]{dbp_init()}}.

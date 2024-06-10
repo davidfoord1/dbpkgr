@@ -15,6 +15,7 @@ create_temp_package_desc <- function(package_name, path) {
     "Version: 0.1.0\n",
     "Title: Temporary DB Package\n",
     "Description: A package built with dbpkgr as an interface to a database connection.\n",
+    "Encoding: UTF-8\n",
     "Depends: R (>= 3.5.0)\n",
     sep = ""
   )
@@ -24,6 +25,38 @@ create_temp_package_desc <- function(package_name, path) {
   invisible()
 }
 
-create_temp_package_man <- function(path) {
-  roxygen2::roxygenise(path, "rd")
+create_temp_package_path <- function(package_name, temporary) {
+  if (temporary) {
+    file.path(tempdir(), package_name)
+  } else {
+    file.path("dkpkgr", package_name)
+  }
+}
+
+#' Uninstall and delete a temporary package
+#'
+#' @param package_name The name of the package to be deleted.
+#' @param path The path to the package files.
+#'
+#' @return
+#' Returns `NULL` invisibly.
+#'
+#' @examples
+#' \dontrun{
+#' remove_temp_package(package_name, dbp_package_path(package_name))
+#' }
+remove_temp_package <- function(package_name) {
+  path <- dbp_package_path(package_name)
+
+  tryCatch({
+    detach(paste0("package:", package_name), unload = TRUE, character.only = TRUE)
+  }, error = function(e) {
+    message(paste0("Package not loaded package:", package_name, " - ", e$message))
+  })
+
+  if (dir.exists(path)) {
+    unlink(path, recursive = TRUE, force = TRUE)
+  }
+
+  invisible()
 }

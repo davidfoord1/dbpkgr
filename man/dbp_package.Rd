@@ -4,19 +4,20 @@
 \alias{dbp_package}
 \title{Create package based on a database connection}
 \usage{
-dbp_package(connection, package_name)
+dbp_package(connection, package_name, temp = TRUE)
 }
 \arguments{
 \item{connection}{A database connection object.}
 
-\item{package_name}{A string to be used as the name of the temporary package and the prefix to its
+\item{package_name}{A string to be used as the name of the temp package and the prefix to its
 functions. Must be a valid package name; lowercase no punctuation recommended.}
 }
 \value{
 Returns \code{NULL} invisbly.
 }
 \description{
-Generates a temporary package
+Generates a temp package with a number of functions
+for interacting with a database connection.
 }
 \examples{
 \dontrun{
@@ -24,7 +25,7 @@ Generates a temporary package
 con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 DBI::dbWriteTable(con, "mtcars", mtcars)
 
-dbp_package(con, mydb)
+dbp_package(con, "mydb")
 
 mydb_list_tables()
 }
