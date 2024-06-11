@@ -61,7 +61,7 @@ The name will be used as a prefix for auto-complete friendly functions, with whi
 mydb_list_tables()
 ```
 
-Retrieve SQL query results from the connection:
+Or retrieve raw SQL query results:
 
 ```{r query}
 mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")

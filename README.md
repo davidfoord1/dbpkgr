@@ -62,14 +62,17 @@ mydb_list_tables()
 #> [1] "iris"   "mtcars"
 ```
 
-Retrieve SQL query results from the connection:
+Or retrieve raw SQL query results:
 
 ``` r
 mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
-#>   cyl count
-#> 1   4    11
-#> 2   6     7
-#> 3   8    14
+#> # Source:   SQL [3 x 2]
+#> # Database: sqlite 3.46.0 [:memory:]
+#>     cyl count
+#>   <dbl> <int>
+#> 1     4    11
+#> 2     6     7
+#> 3     8    14
 ```
 
 Basic documentation is automatically generated for the temporary

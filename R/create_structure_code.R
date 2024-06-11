@@ -9,6 +9,8 @@
 #'
 #' @return
 #' Returns `NULL` invisibly
+#' @import dbplyr
+#' @import DBI
 create_structure_code <- function(package_name) {
   function_name <- paste0(package_name, "_structure")
 
@@ -21,7 +23,8 @@ create_structure_code <- function(package_name) {
     "#' This function is useful for building queries for tables\n",
     "#' in the format \\code{SELECT * FROM catalog.schema.table}.\n",
     "#' \n",
-    "#' @return A data.frame with columns CATALOG, TABLE_SCHEMA, TABLE_NAME.\n",
+    "#' @return A tibble with columns CATALOG, TABLE_SCHEMA, TABLE_NAME.\n",
+    "#' It will be a lazy table/remote connection if information_schema is found.\n",
     "#' TABLE_TYPE.\n",
     "#' @export\n",
     "#' @seealso \\link{", package_name, "_list_tables} for just the table names.\n",
@@ -38,17 +41,16 @@ create_structure_code <- function(package_name) {
     "connection <- ", package_name, "_env[['connection']]\n",
     "tryCatch(\n",
       "{\n",
-        "DBI::dbGetQuery(\n",
-          "connection,\n",
-          "'SELECT TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, TABLE_TYPE,  FROM INFORMATION_SCHEMA.TABLES'\n",
-        ")\n",
+        "dplyr::tbl(connection, dbplyr::sql(\n",
+          "'SELECT TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, TABLE_TYPE FROM INFORMATION_SCHEMA.TABLES'\n",
+        "))\n",
       "},\n",
       "# If unable to generate from INFORMATION_SCHEMA\n",
       "# Use dbListTables and return NA for catalog, schema and table type\n",
       "error = function(e) {\n",
         "tables <- DBI::dbListTables(connection)\n",
        " \n",
-        "data.frame(\n",
+        "tibble::tibble(\n",
           "'TABLE_CATALOG' = rep(NA_character_, length(tables)),\n",
           "'TABLE_SCHEMA' = rep(NA_character_, length(tables)),\n",
           "'TABLE_NAME' = tables,\n",

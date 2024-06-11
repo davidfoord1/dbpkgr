@@ -17,7 +17,7 @@ create_db_package_desc <- function(package_name, path) {
     "Description: A package built with dbpkgr as an interface to a database connection.\n",
     "Encoding: UTF-8\n",
     "Depends: R (>= 3.5.0)\n",
-    "Imports: dbpkgr, DBI"
+    "Imports: dbpkgr, DBI, dbplyr"
   )
 
   writeLines(description_content, con = description_path)
