@@ -2,9 +2,9 @@
 % Please edit documentation in R/create_list_tables_code.R
 \name{create_list_tables_code}
 \alias{create_list_tables_code}
-\title{Generate the code file for _structure functions}
+\title{Generate the code file for _list_table functions}
 \usage{
-create_list_tables_code(package_name, h)
+create_list_tables_code(package_name)
 }
 \arguments{
 \item{package_name}{}
@@ -13,6 +13,6 @@ create_list_tables_code(package_name, h)
 Returns \code{NULL} invisibly.
 }
 \description{
-Generate the R file for a dbpkgr package's structure function. Which
-retrieves information_schema.tables.
+Generate the R file for a dbpkgr package's list_tables function. Which
+retrieves all the table names available from the connection.
 }

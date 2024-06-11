@@ -1,14 +1,15 @@
-#' Generate the code file for _structure functions
+#' Generate the code file for _list_table functions
 #'
 #' @description
-#' Generate the R file for a dbpkgr package's structure function. Which
-#' retrieves information_schema.tables.
+#' Generate the R file for a dbpkgr package's list_tables function. Which
+#' retrieves all the table names available from the connection.
 #'
 #' @param package_name
+#' A string, the name of the package to create the file for.
 #'
 #' @return
 #' Returns `NULL` invisibly.
-create_list_tables_code <- function(package_name,h) {
+create_list_tables_code <- function(package_name) {
   function_name <- paste0(package_name, "_list_tables")
   path <- dbp_package_path(package_name)
 
@@ -21,13 +22,15 @@ create_list_tables_code <- function(package_name,h) {
     "#' Get a list of tables in the database\n",
     "#' \n",
     "#' Queries the `", package_name, "` connection to retrieve a list of table\n",
-    "#' names.\n",
+    "#' names available.\n",
     "#' \n",
     "#' @return A character vector of table names.\n",
     "#' @export\n",
-    "#' @seealso \\link{", package_name, "_structure} for the full information_schema.tables\n",
+    "#' @seealso \\link{", package_name, "_structure} for the full information_schema.tables.\n",
+    "#' \n",
+    "#' @seealso \\link{", package_name, "_list_schemas} for the available schemas.\n",
     function_name, " <- function() {\n",
-    package_name, "_structure()[['TABLE_NAME']]\n",
+    "unique(", package_name, "_structure()[['TABLE_NAME']])\n",
     "}\n"
   )
 

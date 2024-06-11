@@ -57,8 +57,8 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
   create_db_env_code(package_name, connection)
   create_structure_code(package_name)
   create_list_tables_code(package_name)
+  create_list_schemas_code(package_name)
 
-  # create_list_schema_code(package_name, path)
   # create_query_code(package_name, path)
   # create_execute_code(package_name, path)
 
