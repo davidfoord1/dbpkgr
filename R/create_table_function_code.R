@@ -14,12 +14,12 @@ create_table_function_code <- function(package_name) {
   con <- dbp_env[[paste0(package_name, "_connection")]]
   structure <- dbp_get_db_structure(con)
 
-  catalog_names <- structure[["CATALOG_NAME"]]
-  schema_names <- structure[["SCHEMA_NAME"]]
+  catalog_names <- structure[["TABLE_CATALOG"]]
+  schema_names <- structure[["TABLE_SCHEMA"]]
   table_names <- structure[["TABLE_NAME"]]
 
   if (purrr::none(schema_names, is.na)) {
-    from <- paste0(catalog_names, schema_names, table_names, collapse = ".")
+    from <- paste0(catalog_names, schema_names, table_names, sep = ".")
   } else {
     from <- table_names
   }
