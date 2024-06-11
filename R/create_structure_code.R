@@ -9,8 +9,6 @@
 #'
 #' @return
 #' Returns `NULL` invisibly
-#' @import dbplyr
-#' @import DBI
 create_structure_code <- function(package_name) {
   function_name <- paste0(package_name, "_structure")
 
