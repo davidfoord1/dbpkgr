@@ -62,7 +62,47 @@ mydb_list_tables()
 #> [1] "iris"   "mtcars"
 ```
 
-Or retrieve raw SQL query results:
+Tables get their own functions:
+
+``` r
+mydb_iris() 
+#> # Source:   SQL [?? x 5]
+#> # Database: sqlite 3.46.0 [:memory:]
+#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>           <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1          5.1         3.5          1.4         0.2 setosa 
+#>  2          4.9         3            1.4         0.2 setosa 
+#>  3          4.7         3.2          1.3         0.2 setosa 
+#>  4          4.6         3.1          1.5         0.2 setosa 
+#>  5          5           3.6          1.4         0.2 setosa 
+#>  6          5.4         3.9          1.7         0.4 setosa 
+#>  7          4.6         3.4          1.4         0.3 setosa 
+#>  8          5           3.4          1.5         0.2 setosa 
+#>  9          4.4         2.9          1.4         0.2 setosa 
+#> 10          4.9         3.1          1.5         0.1 setosa 
+#> # ℹ more rows
+```
+
+They are lazy loaded - as a connection object that works with a
+dplyr/dbplyr chain:
+
+``` r
+# median petal length/width ratio
+mydb_iris() |>
+  mutate(petal_length_width_ratio = Petal.Length / Petal.Width) |>
+  summarise(petal_length_width_ratio = median(petal_length_width_ratio, na.rm = TRUE), .by = Species) |>
+  arrange(desc(petal_length_width_ratio))
+#> # Source:     SQL [3 x 2]
+#> # Database:   sqlite 3.46.0 [:memory:]
+#> # Ordered by: desc(petal_length_width_ratio)
+#>   Species    petal_length_width_ratio
+#>   <chr>                         <dbl>
+#> 1 setosa                         7   
+#> 2 versicolor                     3.24
+#> 3 virginica                      2.67
+```
+
+Or you can retrieve raw SQL query results:
 
 ``` r
 mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
@@ -75,9 +115,9 @@ mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 #> 3     8    14
 ```
 
-Basic documentation is automatically generated for the temporary
-package, e.g. provided by:
+Basic documentation is automatically generated for the temporary package
+e.g. you could use
 
 ``` r
-?mydb_structure
+help(mydb_structure)
 ```
