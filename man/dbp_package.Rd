@@ -33,3 +33,6 @@ dbp_package(con, "mydb")
 mydb_list_tables()
 }
 }
+\seealso{
+\code{\link[=dbp_init]{dbp_init()}} and \code{\link[=dbp_load]{dbp_load()}} which this function wraps.
+}

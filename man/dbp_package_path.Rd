@@ -13,6 +13,6 @@ dbp_package_path(package_name)
 A string path.
 }
 \description{
-#' Get the path for a package already created by
+#' Get the path for a package already created via
 \code{\link[=dbp_package]{dbp_package()}} or \code{\link[=dbp_init]{dbp_init()}}
 }
