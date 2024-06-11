@@ -58,8 +58,7 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
   create_structure_code(package_name)
   create_list_tables_code(package_name)
   create_list_schemas_code(package_name)
-
-  # create_query_code(package_name, path)
+  create_query_code(package_name)
   # create_execute_code(package_name, path)
 
   # A function per table to work with just that table (e.g. in dbplyr pipeline)

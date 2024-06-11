@@ -47,13 +47,14 @@ dbp_package_path <- function(package_name) {
 #'
 #' @examples
 #' \dontrun{
-#' # demo db in memory
 #' con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 #' DBI::dbWriteTable(con, "mtcars", mtcars)
 #'
 #' dbp_package(con, "mydb")
 #'
 #' mydb_list_tables()
+#'
+#' mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 #' }
 dbp_package <- function(connection, package_name, temp = TRUE) {
   dbp_init(connection, package_name, temp)

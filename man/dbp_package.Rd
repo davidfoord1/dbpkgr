@@ -24,13 +24,14 @@ for interacting with a database connection.
 }
 \examples{
 \dontrun{
-# demo db in memory
 con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 DBI::dbWriteTable(con, "mtcars", mtcars)
 
 dbp_package(con, "mydb")
 
 mydb_list_tables()
+
+mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 }
 }
 \seealso{
