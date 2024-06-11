@@ -1,7 +1,7 @@
 #' Uninstall and delete a dbpkgr db package
 #'
 #' @description Detaches the package from the search path and deletes the
-#' package files. It is is recommended to restart the R session afterwards.
+#' package files. It is recommended to restart the R session afterwards.
 #'
 #' You shouldn't need to call this function as it will be called automatically
 #' on clean up if the package was created with argument `temp = TRUE`. It is

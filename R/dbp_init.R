@@ -55,8 +55,8 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
   # Generate files in the temp_dir based on the connection
   # Each file should have a function and a roxygen docstring
   create_db_env_code(package_name, connection)
+  create_structure_code(package_name)
 
-  # create_structure_code(package_name)
   # create_list_tables_code(package_name, path)
   # create_list_schema_code(package_name, path)
   # create_query_code(package_name, path)

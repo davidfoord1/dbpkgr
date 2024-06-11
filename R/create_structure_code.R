@@ -1,7 +1,8 @@
-#' Generate the code file for db_structure
+#' Generate the code file for _structure functions
 #'
 #' @description
-#' A short description...
+#' Generate the R file for a dbpkgr package's structure function. Which
+#' retrieves information_schema.tables.
 #'
 #' @param package_name
 #' A string, the name of the package to create the file for.
