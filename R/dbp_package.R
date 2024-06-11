@@ -38,17 +38,20 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
 
   dbp_env[[paste0(package_name, "_path")]] <- path
   dbp_env[[paste0(package_name, "_is_temp")]] <- temp
+  dbp_env[[paste0(package_name, "_connection")]] <- connection
 
   create_db_package_dir(path)
   create_db_package_desc(package_name, path)
 
   # Generate files in the temp_dir based on the connection
-  # Each file should have a function and a auto-generated roxygen docstring
+  # Each file should have a function and a roxygen docstring
+  create_db_env_code(package_name, path, connection)
 
-  create_list_tables_fun(package_name, path)
-  # create_list_schema_fun(package_name, path)
-  # create_query_fun(package_name, path)
-  # create_execute_fun(package_name, path)
+  # create_structure_code(package_name)
+  # create_list_tables_code(package_name, path)
+  # create_list_schema_code(package_name, path)
+  # create_query_code(package_name, path)
+  # create_execute_code(package_name, path)
 
   # A function per table to work with just that table (e.g. in dbplyr pipeline)
   # db_structure <- dbp_get_db_structure(connection)
@@ -125,6 +128,9 @@ dbp_package_path <- function(package_name) {
 #' @param package_name
 #' A string to be used as the name of the temp package and the prefix to its
 #' functions. Must be a valid package name; lowercase no punctuation recommended.
+#'
+#' @param temp Whether the the package should be detached and deleted at
+#' the end of the R session. Set to `FALSE` to allow it to persist.
 #'
 #' @return
 #' Returns `NULL` invisbly.
