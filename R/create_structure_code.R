@@ -12,13 +12,6 @@
 create_structure_code <- function(package_name) {
   function_name <- paste0(package_name, "_structure")
 
-  path <- dbp_package_path(package_name)
-
-  file_con <- file(
-    file.path(path, "R", paste0(function_name, ".R")),
-    encoding = "UTF-8"
-  )
-
   function_code <- paste0(
     "#' Get database structure\n",
     "#'\n",
@@ -65,9 +58,5 @@ create_structure_code <- function(package_name) {
     "}\n"
   )
 
-  writeLines(function_code, con = file_con)
-
-  close(file_con)
-
-  invisible()
+  write_R_file(package_name, function_name, function_code)
 }

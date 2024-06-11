@@ -7,7 +7,7 @@
 create_list_tables_code(package_name)
 }
 \arguments{
-\item{package_name}{}
+\item{package_name}{A string, the name of the package to create the file for.}
 }
 \value{
 Returns \code{NULL} invisibly.

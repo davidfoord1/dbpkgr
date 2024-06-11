@@ -11,12 +11,6 @@
 #' Returns `NULL` invisibly.
 create_list_schemas_code <- function(package_name) {
   function_name <- paste0(package_name, "_list_schemas")
-  path <- dbp_package_path(package_name)
-
-  file_con <- file(
-    file.path(path, "R", paste0(function_name, ".R")),
-    encoding = "UTF-8"
-  )
 
   function_code <- paste0(
     "#' Get a list of schemas in the database\n",
@@ -34,9 +28,5 @@ create_list_schemas_code <- function(package_name) {
     "}\n"
   )
 
-  writeLines(function_code, con = file_con)
-
-  close(file_con)
-
-  invisible()
+  write_R_file(package_name, function_name, function_code)
 }
