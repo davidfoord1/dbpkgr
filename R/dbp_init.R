@@ -73,7 +73,7 @@ dbp_init <- function(connection, package_name, temp = TRUE) {
 dbp_load <- function(package_name) {
   path <- dbp_package_path(package_name)
 
-  roxygen2::roxygenise(path)
+  suppressMessages(roxygen2::roxygenise(path))
 
   is_temp <- dbp_env[[paste0(package_name, "_is_temp")]]
 

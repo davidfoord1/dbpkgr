@@ -1,2 +1,4 @@
 ^dbpkgr\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^readme\.html$
