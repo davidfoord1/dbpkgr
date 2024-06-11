@@ -41,5 +41,8 @@ interface up and running, which wraps these two functions.
 }
 \seealso{
 \code{\link[=dbp_package]{dbp_package()}} the convenient wrapper for these two functions.
+
 \code{\link[=dbp_package_path]{dbp_package_path()}} to locate the package files.
+
+\code{\link[=dbp_unload]{dbp_unload()}} to remove the loaded package.
 }

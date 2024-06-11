@@ -34,7 +34,10 @@ dbp_env <- new.env(parent = emptyenv())
 #'
 #' @seealso
 #' [dbp_package()] the convenient wrapper for these two functions.
+#'
 #' [dbp_package_path()] to locate the package files.
+#'
+#' [dbp_unload()] to remove the loaded package.
 #'
 #' @return
 #' Returns `NULL` invisibly.
@@ -79,7 +82,7 @@ dbp_load <- function(package_name) {
     reg.finalizer(dbp_env, onexit = TRUE, function(e) {
       # Called when the dbp_env is unloaded
       # e.g. at the end of an R session
-      remove_db_package(package_name)
+      dbp_unload(package_name)
     })
   }
 
