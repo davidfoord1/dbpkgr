@@ -52,8 +52,13 @@ dbp_package_path <- function(package_name) {
 #'
 #' dbp_package(con, "mydb")
 #'
+#' # Get info about the database
 #' mydb_list_tables()
 #'
+#' # Each table is available as a lazy tbl
+#' mydb_mtcars()
+#'
+#' # And you can query with raw SQL
 #' mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 #' }
 dbp_package <- function(connection, package_name, temp = TRUE) {

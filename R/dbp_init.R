@@ -11,13 +11,11 @@ dbp_env <- new.env(parent = emptyenv())
 #' [roxygen2::roxygenise()].
 #'
 #'
-#' As the automatically generated
-#' documentation is quite limited, [dbp_init()] is exported to generate the
-#' files without installing the package. You can then make your own changes
-#' to the package like adding more detailed roxygen documentation.
-#' Once you're done,
-#' you can pass the package name to [dbp_load()] to install and load
-#' the package.
+#' As the automatically generated documentation is quite limited, [dbp_init()]
+#' is exported to generate the files without installing the package. You can
+#' then make your own changes to the package like adding more detailed roxygen
+#' documentation. Once you're done, you can pass the package name to
+#' [dbp_load()] to install and load the package.
 #'
 #' [dbp_package()] is the easy, one-line way to get a package as the connection
 #' interface up and running, which wraps these two functions.
@@ -43,23 +41,27 @@ dbp_env <- new.env(parent = emptyenv())
 #' Returns `NULL` invisibly.
 #' @export
 dbp_init <- function(connection, package_name, temp = TRUE) {
+  # Set up a path for the package
   path <- create_db_package_path(package_name, temp)
 
+  # Store some information about the package outside the package
   dbp_env[[paste0(package_name, "_path")]] <- path
   dbp_env[[paste0(package_name, "_is_temp")]] <- temp
   dbp_env[[paste0(package_name, "_connection")]] <- connection
 
+  # Create the folders path and path/R/
   create_db_package_dir(path)
+  # Create the file path/DESCRIPTION
   create_db_package_desc(package_name, path)
 
   # Generate files in the temp_dir based on the connection
-  # Each file should have a function and a roxygen docstring
+  # Generate .R files under path/R/
   create_db_env_code(package_name, connection)
   create_structure_code(package_name)
   create_list_tables_code(package_name)
   create_list_schemas_code(package_name)
   create_query_code(package_name)
-  # create_execute_code(package_name, path)
+  create_execute_code(package_name)
   create_table_function_code(package_name)
 
   invisible()

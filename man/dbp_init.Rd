@@ -28,13 +28,11 @@ and .R files, including roxygen comments and function definitions.
 \code{\link[=dbp_load]{dbp_load()}} generates help pages and loads the package with
 \code{\link[roxygen2:roxygenize]{roxygen2::roxygenise()}}.
 
-As the automatically generated
-documentation is quite limited, \code{\link[=dbp_init]{dbp_init()}} is exported to generate the
-files without installing the package. You can then make your own changes
-to the package like adding more detailed roxygen documentation.
-Once you're done,
-you can pass the package name to \code{\link[=dbp_load]{dbp_load()}} to install and load
-the package.
+As the automatically generated documentation is quite limited, \code{\link[=dbp_init]{dbp_init()}}
+is exported to generate the files without installing the package. You can
+then make your own changes to the package like adding more detailed roxygen
+documentation. Once you're done, you can pass the package name to
+\code{\link[=dbp_load]{dbp_load()}} to install and load the package.
 
 \code{\link[=dbp_package]{dbp_package()}} is the easy, one-line way to get a package as the connection
 interface up and running, which wraps these two functions.

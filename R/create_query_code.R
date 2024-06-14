@@ -24,6 +24,8 @@ create_query_code <- function(package_name) {
     "#' @details Executes \\code{dplyr::tbl()}\n",
     "#' \n",
     "#' @seealso \\link{", package_name, "_list_tables} for the tables that can be queried.\n",
+    "#' \n",
+    "#' \\link{", package_name, "_execute} to execute a SQL statement agianst the connection\n",
     function_name, " <- function(query) {\n",
     "connection <- ", package_name, "_env[['connection']]\n",
     "dplyr::tbl(connection, dplyr::sql(query))\n",
