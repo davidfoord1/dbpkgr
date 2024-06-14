@@ -24,16 +24,22 @@ dbpkgr seeks to turn a database connection into a temporary R package to provide
 - `_list_schemas()` retrieves a character vector of schema names available.
 - `_list_tables()` retrieves a character vector of table names available.
 - `_query()` takes a SQL string and retrieves the result as a data.frame.
+- `_execute()` takes an SQL string and executes it against the connection.
 
-It is designed to work best where an `INFORMATION_SCHEMA` is provided by the connection database management system (DBMS). Once the package is created you don't need to handle the connection object anymore.
+As well as a function for each and every table in the database, so you can take
+advantage of autocomplete for table names.
+
+The package is most functional where an `INFORMATION_SCHEMA` is provided by the
+connection database management system (DBMS), which it can used to get the
+`_structure()` and build queries like `FROM table_schema.table_name`. 
 
 ## Installation
 
 You can install the development version of dbpkgr from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("davidfoord1/dbpkgr")
+# install.packages("remotes")
+remotes::install_github("davidfoord1/dbpkgr")
 ```
 
 ## Example
@@ -42,14 +48,16 @@ devtools::install_github("davidfoord1/dbpkgr")
 library(dbpkgr)
 ```
 
-A demo with a database in memory:
+A demo connection with a database in memory:
 ```{r cars}
 connection <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 DBI::dbWriteTable(connection, "mtcars", mtcars)
 DBI::dbWriteTable(connection, "iris", iris)
 ```
 
-Set up the package with a single function call, supplying the connection and package name:
+Set up the package with a call to `dbp_package`, supplying the connection and
+package name. Once the package is created you don't need to handle the
+connection object anymore.
 
 ```{r package}
 dbp_package(connection, "mydb")
@@ -64,23 +72,32 @@ mydb_list_tables()
 Tables get their own functions:
 
 ```{r}
-mydb_iris() 
+mydb_mtcars()
 ```
 
 They are lazy loaded - as a connection object that works with a dplyr/dbplyr chain:
 
 ```{r dplyr}
-# median petal length/width ratio
+# median petal length/width ratio by species
 mydb_iris() |>
-  mutate(petal_length_width_ratio = Petal.Length / Petal.Width) |>
-  summarise(petal_length_width_ratio = median(petal_length_width_ratio, na.rm = TRUE), .by = Species) |>
-  arrange(desc(petal_length_width_ratio))
+  mutate(petal_ratio = Petal.Length / Petal.Width) |>
+  summarise(petal_ratio = median(petal_ratio, na.rm = TRUE), .by = Species) |>
+  arrange(desc(petal_ratio))
 ```
 
-Or you can retrieve raw SQL query results:
+You can retrieve raw SQL query results:
 
 ```{r query}
 mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
+```
+
+And execute SQL statements that don't return a table:
+
+```{r execute}
+mydb_execute("CREATE TABLE table_1 (ID int PRIMARY KEY)")
+mydb_list_tables()
+mydb_execute("DROP TABLE table_1")
+mydb_list_tables()
 ```
 
 Basic documentation is automatically generated for the temporary package e.g. you could use 
