@@ -24,7 +24,7 @@ create_list_tables_code <- function(package_name) {
     "#' \n",
     "#' @seealso \\link{", package_name, "_list_schemas} for the available schemas.\n",
     function_name, " <- function() {\n",
-    "unique(", package_name, "_structure()[['TABLE_NAME']])\n",
+    "unique(", package_name, "_structure()[['table_name']])\n",
     "}\n"
   )
 

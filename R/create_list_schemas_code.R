@@ -24,7 +24,7 @@ create_list_schemas_code <- function(package_name) {
     "#' \n",
     "#' @seealso \\link{", package_name, "_structure} for the full information_schema.schemas.\n",
     function_name, " <- function() {\n",
-    "unique(", package_name, "_structure()[['SCHEMA_NAME']])\n",
+    "unique(", package_name, "_structure()[['table_schema']])\n",
     "}\n"
   )
 
