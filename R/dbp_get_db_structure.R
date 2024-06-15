@@ -1,7 +1,9 @@
 #' Get database structure
 #'
-#' Attempts to read catalog, schema, table name and type from `INFORMATION_SCHEMA.TABLES`.
-#' If `INFORMATION_SCHEMA` is not available, it uses [DBI::dbListTables()] and returns
+#' Returns a table of information about the structure of the database.
+#' Specfically, it attempts to read catalog, schema, table name and type from
+#' `INFORMATION_SCHEMA.TABLES`. If `INFORMATION_SCHEMA` is not available, it
+#' uses [DBI::dbListTables()] and returns
 #' `NA` for columns other than TABLE_NAME.
 #' This function is useful for building queries for tables
 #' in the format `SELECT * FROM catalog.schema.table`.
@@ -13,24 +15,23 @@
 #'
 #' @param connection A database connection to get the structure for.
 #'
-#' @return A tibble with columns CATALOG, TABLE_SCHEMA, TABLE_NAME.
-#' It will be a lazy table/remote connection if information_schema is found.
-#' TABLE_TYPE.
+#' @return A `lazy tbl` with columns `catalog`, `table_schema`, `table_name`, `table_type`.
+#' It will be a `tibble` if information_schema is not found.
 #'
 #' @export
 #' @import dbplyr
-dbp_get_db_structure <- function(connection) {
+dbp_db_structure <- function(connection) {
   tryCatch(dplyr::tbl(
     connection,
-    dplyr::sql("SELECT TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES"))
+    dplyr::sql("SELECT table_catalog, table_schema, table_name, table_type FROM INFORMATION_SCHEMA.TABLES"))
   ,
   error = function(e) {
     tables <- DBI::dbListTables(connection)
     tibble::tibble(
-          'TABLE_CATALOG' = rep(NA_character_, length(tables)),
-          'TABLE_SCHEMA' = rep(NA_character_, length(tables)),
-          'TABLE_NAME' = tables,
-          'TABLE_TYPE' = rep(NA_character_, length(tables)),
+          'table_catalog' = rep(NA_character_, length(tables)),
+          'table_schema' = rep(NA_character_, length(tables)),
+          'table_name' = tables,
+          'table_type' = rep(NA_character_, length(tables)),
     )
   })
 }

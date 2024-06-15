@@ -12,11 +12,11 @@
 #' Returns `NULL` invisibly
 create_table_function_code <- function(package_name) {
   con <- dbp_env[[paste0(package_name, "_connection")]]
-  structure <- dbp_get_db_structure(con)
+  structure <- dbp_db_structure(con)
 
-  catalog_names <- structure[["TABLE_CATALOG"]]
-  schema_names <- structure[["TABLE_SCHEMA"]]
-  table_names <- structure[["TABLE_NAME"]]
+  catalog_names <- structure[["table_catalog"]]
+  schema_names <- structure[["table_schema"]]
+  table_names <- structure[["table_name"]]
 
   if (purrr::none(schema_names, is.na)) {
     from <- paste0(catalog_names, schema_names, table_names, sep = ".")
@@ -29,9 +29,10 @@ create_table_function_code <- function(package_name) {
   text <- paste0(
     "#' Get the ", table_names, " table\n",
     "#' \n",
-    "#' @description Lazy load the \\code{", table_names, "} table.\n",
+    "#' @description Lazy load the \\code{", table_names, "} table\n",
+    "#' from the `", package_name, "` connection.\n",
     "#' \n",
-    "#' @return A \\code{dplyr::tbl} / a lazy sql \\code{tibble}\n",
+    "#' @return A lazy \\code{tbl}\n",
     "#' @export\n",
     "#' @details Created with ",
     "#' \\code{dplyr::tbl(connection, dplyr::sql('SELECT * FROM ", from, "'))}\n",
