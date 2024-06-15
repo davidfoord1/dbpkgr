@@ -13,7 +13,7 @@ create_structure_code <- function(package_name) {
   function_name <- paste0(package_name, "_structure")
 
   function_code <- paste0(
-    "#' Get database structure\n",
+    "#' Get ", package_name, " database structure\n",
     "#'\n",
     "#' Returns a table of schema and table information for the `", package_name, "` connection.\n",
     "#' It attempts to read from \\code{information_schema.tables}.\n",

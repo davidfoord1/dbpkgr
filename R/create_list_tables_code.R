@@ -13,7 +13,7 @@ create_list_tables_code <- function(package_name) {
   function_name <- paste0(package_name, "_list_tables")
 
   function_code <- paste0(
-    "#' Get a list of tables in the database\n",
+    "#' Get a list of tables in the ", package_name, " database\n",
     "#' \n",
     "#' Queries the `", package_name, "` connection to retrieve a list of table\n",
     "#' names available.\n",

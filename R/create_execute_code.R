@@ -13,7 +13,7 @@ create_execute_code <- function(package_name) {
   function_name <- paste0(package_name, "_execute")
 
   function_code <- paste0(
-    "#' Retrieve results from a query\n",
+    "#' Execute a SQL statement\n",
     "#' \n",
     "#' Executes an SQL statement on the `", package_name, "` connection\n",
     "#' as a lazy tibble.\n",

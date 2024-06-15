@@ -13,7 +13,7 @@ create_query_code <- function(package_name) {
   function_name <- paste0(package_name, "_query")
 
   function_code <- paste0(
-    "#' Retrieve results from a query\n",
+    "#' Retrieve results from a query to the ", package_name, " database\n",
     "#' \n",
     "#' Returns the result of a SQL query to the `", package_name, "` connection\n",
     "#' as a lazy tibble.\n",

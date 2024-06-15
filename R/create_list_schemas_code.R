@@ -13,7 +13,7 @@ create_list_schemas_code <- function(package_name) {
   function_name <- paste0(package_name, "_list_schemas")
 
   function_code <- paste0(
-    "#' Get a list of schemas in the database\n",
+    "#' Get a list of schemas in the ", package_name, " database\n",
     "#' \n",
     "#' Queries the `", package_name, "` connection to retrieve a list of schema\n",
     "#' names available.\n",
