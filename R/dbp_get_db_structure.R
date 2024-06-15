@@ -11,7 +11,7 @@
 #' The `_structure()` functions generated for each package work the same,
 #' without taking the connection argument. This function is exported for working
 #' with connection information to enhance the package e.g. after calling
-#' [dbp_init()] and before [dbp_load()].
+#' [dbp_generate()] and before [dbp_load()].
 #'
 #' @param connection A database connection to get the structure for.
 #'

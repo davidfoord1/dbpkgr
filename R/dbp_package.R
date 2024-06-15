@@ -2,7 +2,7 @@
 #'
 #' @description
 #' #' Get the path for a package already created via
-#' [dbp_package()] or [dbp_init()]
+#' [dbp_package()] or [dbp_generate()]
 #'
 #' @param package_name The name of the package to locate
 #'
@@ -43,7 +43,7 @@ dbp_package_path <- function(package_name) {
 #' Returns `NULL` invisbly.
 #' @export
 #'
-#' @seealso [dbp_init()] and [dbp_load()] which this function wraps.
+#' @seealso [dbp_generate()] and [dbp_load()] which this function wraps.
 #'
 #' @examples
 #' \dontrun{
@@ -62,7 +62,7 @@ dbp_package_path <- function(package_name) {
 #' mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 #' }
 dbp_package <- function(connection, package_name, temp = TRUE) {
-  dbp_init(connection, package_name, temp)
+  dbp_generate(connection, package_name, temp)
 
   dbp_load(package_name)
 

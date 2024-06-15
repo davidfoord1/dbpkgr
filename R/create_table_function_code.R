@@ -39,7 +39,7 @@ create_table_function_code <- function(package_name) {
     "#' \n",
     "#' @seealso \\link{", package_name, "_list_tables} for the tables that can be queried.\n",
     function_names, " <- function() {\n",
-    "connection <- ", package_name, "_env[['connection']]\n",
+    "connection <- ", package_name,"_dbpkgr_env[['connection']]\n",
     "dplyr::tbl(connection, dplyr::sql('SELECT * FROM ", from, "'))\n",
     "}\n"
   )

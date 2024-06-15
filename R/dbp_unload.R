@@ -9,7 +9,7 @@
 #' `temp = FALSE`.
 #'
 #' @param package_name The name of the dbpkgr package to be deleted. This should
-#' be a package created by [dbp_package()] or [dbp_init()].
+#' be a package created by [dbp_package()] or [dbp_generate()].
 #'
 #' @return
 #' Returns `NULL` invisibly.

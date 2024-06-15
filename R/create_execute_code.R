@@ -24,7 +24,7 @@ create_execute_code <- function(package_name) {
     "#' \n",
     "#' @seealso \\link{", package_name, "_query} to retrieve result from a SQL query.\n",
     function_name, " <- function(statement) {\n",
-    "connection <- ", package_name, "_env[['connection']]\n",
+    "connection <- ", package_name,"_dbpkgr_env[['connection']]\n",
     "DBI::dbExecute(connection, statement)",
     "}\n"
   )

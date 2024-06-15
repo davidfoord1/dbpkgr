@@ -13,15 +13,14 @@ create_db_env_code <- function(package_name, connection) {
   path <- dbp_package_path(package_name)
 
   file_con <- file(
-    file.path(path, "R", paste0(package_name, "_env.R")),
+    file.path(path, "R", paste0(package_name,"_dbpkgr_env.R")),
     encoding = "UTF-8"
   )
 
-  pkg_env_name <- paste0(package_name, "_env")
+  pkg_env_name <- paste0(package_name,"_dbpkgr_env")
 
   file_content <- paste0(
     pkg_env_name, " <- new.env(parent = emptyenv())\n",
-    "path <- dbp_package_path('", package_name, "')\n",
     "con <- dbpkgr:::dbp_env[['", package_name, "_connection']]\n",
     pkg_env_name, "[['connection']] <- con \n"
   )

@@ -27,7 +27,7 @@ create_query_code <- function(package_name) {
     "#' \n",
     "#' \\link{", package_name, "_execute} to execute a SQL statement agianst the connection\n",
     function_name, " <- function(query) {\n",
-    "connection <- ", package_name, "_env[['connection']]\n",
+    "connection <- ", package_name,"_dbpkgr_env[['connection']]\n",
     "dplyr::tbl(connection, dplyr::sql(query))\n",
     "}\n"
   )

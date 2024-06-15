@@ -25,9 +25,9 @@ create_db_package_desc <- function(package_name, path) {
   invisible()
 }
 
-create_db_package_path <- function(package_name, temporary) {
-  if (temporary) {
-    file.path(tempdir(), package_name)
+create_db_package_path <- function(package_name, project_is_package) {
+  if (project_is_package) {
+    getwd()
   } else {
     file.path("dkpkgr", package_name)
   }

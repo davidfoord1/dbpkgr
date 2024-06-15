@@ -40,5 +40,5 @@ mydb_query("SELECT cyl, COUNT(cyl) AS count FROM mtcars GROUP BY cyl")
 }
 }
 \seealso{
-\code{\link[=dbp_init]{dbp_init()}} and \code{\link[=dbp_load]{dbp_load()}} which this function wraps.
+\code{\link[=dbp_generate]{dbp_generate()}} and \code{\link[=dbp_load]{dbp_load()}} which this function wraps.
 }

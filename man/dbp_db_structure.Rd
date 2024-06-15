@@ -26,5 +26,5 @@ in the format \verb{SELECT * FROM catalog.schema.table}.
 The \verb{_structure()} functions generated for each package work the same,
 without taking the connection argument. This function is exported for working
 with connection information to enhance the package e.g. after calling
-\code{\link[=dbp_init]{dbp_init()}} and before \code{\link[=dbp_load]{dbp_load()}}.
+\code{\link[=dbp_generate]{dbp_generate()}} and before \code{\link[=dbp_load]{dbp_load()}}.
 }
