@@ -9,11 +9,13 @@ dbp_generate(connection, package_name, project_is_package = TRUE)
 \arguments{
 \item{connection}{A database connection object.}
 
-\item{project_is_package}{A logical indicating whether dbpkgr is being used
-to build a database specific package. If \code{TRUE}, files will be written to
-\verb{R/}. Default is \code{FALSE}, which generates files in a custom
-dbpkgr/package_name/, ready to be loaded for interactive use with
-\code{\link[=dbp_load]{dbp_load()}}.}
+\item{package_name}{A string to be used as the name of the temp package and the prefix to its
+functions. Must be a valid package name; lowercase no punctuation recommended.}
+
+\item{project_is_package}{A logical indicating whether dbpkgr is being used to build a database
+specific package. If \code{TRUE}, files will be written to \verb{R/}. Default is
+\code{FALSE}, which generates files in a custom dbpkgr/package_name/, ready to
+be loaded for interactive use with \code{\link[=dbp_load]{dbp_load()}}.}
 }
 \value{
 Returns \code{NULL} invisibly.
@@ -42,7 +44,7 @@ the database:
 \item{\code{_list_schemas()}} - get a character vector of schema names.
 \item{\code{_list_tables()}} - get a character vector of table names.
 \item{\code{_query()}} - get the results of SQL query on the connection.
-\item{\code{_execute()}} - execute a SQL statement on the connection.
+\item{\code{_execute()}} - execute a SQL statement like \code{CREATE} or \code{DROP}on the connection.
 }
 
 As well as functions for each of the tables in the database.

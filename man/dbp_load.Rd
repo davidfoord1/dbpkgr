@@ -31,7 +31,7 @@ the database:
 \item{\code{_list_schemas()}} - get a character vector of schema names.
 \item{\code{_list_tables()}} - get a character vector of table names.
 \item{\code{_query()}} - get the results of SQL query on the connection.
-\item{\code{_execute()}} - execute a SQL statement on the connection.
+\item{\code{_execute()}} - execute a SQL statement like \code{CREATE} or \code{DROP}on the connection.
 }
 
 As well as functions for each of the tables in the database.
